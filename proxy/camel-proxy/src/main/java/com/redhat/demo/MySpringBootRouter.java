@@ -42,7 +42,6 @@ public class MySpringBootRouter extends RouteBuilder {
                 + "${headers." + Exchange.HTTP_HOST + "}:"
                 + "${headers." + Exchange.HTTP_PORT + "}"
                 + "${headers." + Exchange.HTTP_PATH + "}")
-            // .to("netty-http://http://backend-summukhe-dev.apps.sandbox-m4.g2pi.p1.openshiftapps.com:80/greeting")
             .process(MySpringBootRouter::uppercase);
     }
 

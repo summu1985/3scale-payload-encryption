@@ -50,20 +50,6 @@ public class DemoRestController {
         EncryptionMethod enc = EncryptionMethod.A256GCM;
 
         String pubKeyContent = new String(Files.readAllBytes(new File("/mnt/secrets/publickey.crt").toPath()), Charset.defaultCharset());
-//         String pemEncodedRSAPublicKey = "-----BEGIN PUBLIC KEY-----
-// MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoAjzfdDrNhhs2iDm4MFt
-// kxt+s1V+UnH/YinpIQF6WnpWtg4SuXBPEAUuEs8XyHfuqKwBqRrv/j5IaIii4d67
-// UzSVndD7v+Wj0UhpPqQUD0W3+LkchKN4r/PLJ1qc6Bc8H3wrhkJzpCZFwp2z84Fl
-// rnijA3MuhQLXGB3NwfCtF2yEO6ahMQuvw22X94hB0C6s0798Fs/Rpo7cgLcZYSOd
-// J/URQoVRgLyMkRJgmFub368Lm5LYSBkzx3PSGF9GtSRIeaQj0HfFCfrbBQK5Ywya
-// LVGSyY4F6JJCgRBnIm3zSycb0INhRYfoM84R1iqXd8TWas4DtfdDavZFlOy+hKGP
-// vQIDAQAB
-// -----END PUBLIC KEY-----";
-
-// Parse PEM-encoded key to RSA public / private JWK
-
-// JWK jwk = JWK.parseFromPEMEncodedObjects(pubKeyContent);
-// RSAPublicKey rsaPublicKey = jwk.
 
     String publicKeyPEM = pubKeyContent
       .replace("-----BEGIN PUBLIC KEY-----", "")
@@ -108,21 +94,6 @@ public class DemoRestController {
             keyGenerator.init(enc.cekBitLength());
             SecretKey cek = keyGenerator.generateKey();
 
-            // Input data
-            // String input = new StringBuilder()
-            //                 .append("{")
-            //                 .append("\"uid\": \"\",")
-            //                 .append("\"productCategory\": \"\",")
-            //                 .append("\"sourcingChannel\": \"\",")
-            //                 .append("\"mobileNumber\": \"\",")
-            //                 .append("\"partnerName\": \"\",")
-            //                 .append("\"leadId\": \"\",")
-            //                 .append("\"applicantFirstName\": \"\",")
-            //                 .append("\"applicantMiddleName\": \"\",")
-            //                 .append("\"applicantLastName\": \"\",")
-            //                 .append("\"applicantDOB\": \"\",")
-            //                 .append("\"applicantPanNumber\": \"\"")
-            //                 .append("}").toString();
             // Encrypt the JWE with the RSA public key + specified AES CEK
             JWEObject jwe = new JWEObject(
                     new JWEHeader(alg, enc),
@@ -146,19 +117,12 @@ public class DemoRestController {
 
                 // System.out.println("Data : " + data);
 
-                // System.err.println("Encrypted data : "+
-                // JsonMarshaller.toJsonPrettyFormatted(jwe));
-                // System.out.println(" JWE JSON flattened:\n" + new
-                // JsonbUtility().withFormatting(true).marshal(jwe));
-
                 // Now send this request to the backend
 
                 RestTemplate restTemplate = new RestTemplate();
                 String fooResourceUrl = "https://demo-3scale-apicast-staging.apps.cluster-brpsf.brpsf.sandbox3217.opentlc.com:443/greeting?user_key=5beee0a6b098664d383cb5a97e45c51c";
                 ResponseEntity<String> response = restTemplate.postForEntity(fooResourceUrl , jweString , String.class);
-                //ResponseEntity<String> response = restTemplate.getForEntity(fooResourceUrl + "/1", String.class);
                 if (response.getStatusCode().equals(HttpStatus.OK)){
-                    
                     data = response.getBody();
                     System.out.println("Got response :" + data);
                 } else {

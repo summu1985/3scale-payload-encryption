@@ -27,31 +27,6 @@ public class DemoRestController {
     public String greetInResponse(@RequestBody String greeting) throws Exception {
 
         logger.info("Recieved greeting: " + greeting);
-        // String privKeyContent = new String(Files.readAllBytes(new
-        // File("/Users/sumit/pkcs8.key").toPath()),
-        // Charset.defaultCharset());
-        // String pemEncodedRSAPublicKey = "-----BEGIN PUBLIC KEY-----
-        // RSAPrivateKey rsaPrivateKey = readPKCS8PrivateKey(new File("/mnt/secrets/pkcs8.key"));
-        // JWEObject jwe = JWEObject.parse(greeting);
-        // jwe.decrypt(new RSADecrypter(rsaPrivateKey));
-        // System.out.println("Decrypted Payload : " + jwe.getPayload().toString());
-        // assertEquals("Hello, world!", jwe.getPayload().toString());
-        // ObjectMapper mapper = new ObjectMapper();
-
-        // // convert JSON string to Map
-        // // uncheck assignment
-        // // Map<String, Object> map = mapper.readValue(json, Map.class);
-
-        // // Convert JSON string to Map
-        // Map<String, Object> map = mapper.readValue(greeting, new TypeReference<>()
-        // {});
-
-        // // Output the contents of the Map to verify the conversion
-        // System.out.println("Map content: " + map);
-        // String encodedHeadeString =
-        // Base64.getEncoder().encodeToString(map.get("header").toString().getBytes());
-        // System.out.println("Base64 header : " + encodedHeadeString);
-        // String responseGreeting = jwe.getPayload().toString();
         // // Convert JSON string to Map
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map = mapper.readValue(greeting, new TypeReference<>() {
