@@ -120,7 +120,7 @@ public class DemoRestController {
                 // Now send this request to the backend
 
                 RestTemplate restTemplate = new RestTemplate();
-                String fooResourceUrl = "https://demo-3scale-apicast-staging.apps.cluster-brpsf.brpsf.sandbox3217.opentlc.com:443/greeting?user_key=5beee0a6b098664d383cb5a97e45c51c";
+                String fooResourceUrl = "https://demo-3scale-apicast-staging.apps.cluster-slsjz.slsjz.sandbox374.opentlc.com:443/greeting?user_key=5beee0a6b098664d383cb5a97e45c51c";
                 ResponseEntity<String> response = restTemplate.postForEntity(fooResourceUrl , jweString , String.class);
                 if (response.getStatusCode().equals(HttpStatus.OK)){
                     data = response.getBody();

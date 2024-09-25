@@ -1,0 +1,89 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {},
+    "id": "lead-schema",
+    "type": "object",
+    "properties": {
+      "uid": {
+            "default": 1,
+            "description": "An explanation about the purpose of this instance.",
+            "id": "/properties/uid",
+            "title": "The id schema",
+            "type": "integer"
+        },
+      "productCategory": {
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/productCategory",
+        "title": "The id schema",
+        "type": "string"
+    },
+      "sourcingChannel": {
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/sourcingChannel",
+        "title": "The id schema",
+        "type": "string"
+    },
+      "mobileNumber": {
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/mobileNumber",
+        "title": "The id schema",
+        "type": "string"
+    },
+      "partnerName": {
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/partnerName",
+        "title": "The id schema",
+        "type": "string"
+    },
+      "leadId": {
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/productCategory",
+        "title": "The id schema",
+        "type": "string"
+    },
+      "applicantFirstName": {
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/leadId",
+        "title": "The id schema",
+        "type": "string"
+    },
+      "applicantMiddleName":{
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/applicantMiddleName",
+        "title": "The id schema",
+        "type": "string"
+    },
+      "applicantLastName": {
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/applicantLastName",
+        "title": "The id schema",
+        "type": "string"
+    },
+      "applicantDOB": {
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/applicantDOB",
+        "title": "The id schema",
+        "type": "string"
+    },
+      "applicantPanNumber": {
+        "default": 1,
+        "description": "An explanation about the purpose of this instance.",
+        "id": "/properties/applicantPanNumber",
+        "title": "The id schema",
+        "type": "string"
+    }
+},
+    "required": [
+      "uid",
+      "leadId"
+    ]
+  }
