@@ -49,7 +49,6 @@ public class MySpringBootRouter extends RouteBuilder {
             .convertBodyTo(String.class)
             .log("${body}")
             .process(MySpringBootRouter::retrieveToken)
-            //.setHeader("Authorization", simple("Bearer dGVzdDp0ZXN0"))
             .to("log:DEBUG?showHeaders=true")
             // restore the original path
             .setHeader("CamelHttpPath", simple("${headers.originalPath}"))
