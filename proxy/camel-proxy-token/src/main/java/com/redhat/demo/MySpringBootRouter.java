@@ -41,24 +41,49 @@ public class MySpringBootRouter extends RouteBuilder {
             .log("${headers.CamelHttpPort}")
             .setHeader("originalPath", simple("${headers.CamelHttpPath}"))
             .setHeader("CamelHttpPath", constant("/token"))
+            // .setHeader("CamelHttpPath", constant("/patientapp/authentication"))
             .log("${headers.CamelHttpPath}")
+            .setHeader("originalBody", simple("${body}"))
             .setHeader(Exchange.HTTP_METHOD, constant("POST"))
             .setHeader(Exchange.CONTENT_TYPE, simple("application/json"))
+
+            // Set the username and password for the token api
+            .setHeader("username",simple("{{token.api.username}}"))
+            .setHeader("password", simple("{{token.api.password}}"))
+            .log("${headers.username}")
+            .log("${headers.password}")
+            .process(MySpringBootRouter::setTokenAPIPayload)
+
+            //call the token API
             .to("http://localhost:8181?bridgeEndpoint=true")
+            // .to("http://trakpatch.manipalhospitals.com:58900?bridgeEndpoint=true")
             .to("log:DEBUG?showBody=true&showHeaders=true")
             .convertBodyTo(String.class)
             .log("${body}")
+
             .process(MySpringBootRouter::retrieveToken)
-            .to("log:DEBUG?showHeaders=true")
-            // restore the original path
+            .to("log:DEBUG?showBody=true&showHeaders=true")
+
+            // restore the original path and body
+            .setBody(simple("${headers.originalBody}"))
             .setHeader("CamelHttpPath", simple("${headers.originalPath}"))
             .setHeader(Exchange.HTTP_METHOD, constant("GET"))
+            .to("log:DEBUG?showBody=true&showHeaders=true")
+
+            //now call the actual backend
             .toD("netty-http:"
                 + "${headers." + Exchange.HTTP_SCHEME + "}://"
                 + "${headers." + Exchange.HTTP_HOST + "}:"
                 + "${headers." + Exchange.HTTP_PORT + "}"
                 + "${headers." + Exchange.HTTP_PATH + "}");
             // .process(MySpringBootRouter::uppercase);
+    }
+
+    public static void setTokenAPIPayload(final Exchange exchange) {
+        String username = exchange.getIn().getHeader("username").toString();
+        String password = exchange.getIn().getHeader("password").toString();
+        String requestBody = "{\"username\": \""+username+"\", \"password\": \""+password+"\"}";
+        exchange.getIn().setBody(requestBody,String.class);
     }
 
     public static void retrieveToken(final Exchange exchange) throws Exception {
