@@ -40,8 +40,8 @@ public class MySpringBootRouter extends RouteBuilder {
             .log("${headers.CamelHttpHost}")
             .log("${headers.CamelHttpPort}")
             .setHeader("originalPath", simple("${headers.CamelHttpPath}"))
-            .setHeader("CamelHttpPath", constant("/token"))
-            // .setHeader("CamelHttpPath", constant("/patientapp/authentication"))
+            //.setHeader("CamelHttpPath", constant("/token"))
+            .setHeader("CamelHttpPath", constant("/patientapp/authentication"))
             .log("${headers.CamelHttpPath}")
             .setHeader("originalBody", simple("${body}"))
             .setHeader(Exchange.HTTP_METHOD, constant("POST"))
@@ -55,8 +55,8 @@ public class MySpringBootRouter extends RouteBuilder {
             .process(MySpringBootRouter::setTokenAPIPayload)
 
             //call the token API
-            .to("http://localhost:8181?bridgeEndpoint=true")
-            // .to("http://trakpatch.manipalhospitals.com:58900?bridgeEndpoint=true")
+            //.to("http://localhost:8181?bridgeEndpoint=true")
+            .to("http://trakpatch.manipalhospitals.com:58900?bridgeEndpoint=true")
             .to("log:DEBUG?showBody=true&showHeaders=true")
             .convertBodyTo(String.class)
             .log("${body}")
