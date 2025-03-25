@@ -38,9 +38,9 @@ public class DemoRestController {
         Map<String, Object> map = mapper.readValue(userRequest, new TypeReference<>() {
         });
         //map.put("uid", "1234");
-        map.put("userName", "srk");
-        map.put("firstName", "Shahrukh");
-        map.put("lastName", "Khan");
+        map.put("userName", "srt");
+        map.put("firstName", "Sachin");
+        map.put("lastName", "Tendulkar");
         map.put("mobileNumber", "1234567890");
         map.put("status", "active");
         // map.put("city", "Mumbai");
