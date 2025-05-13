@@ -10,6 +10,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,15 +28,17 @@ public class DemoRestController {
 
     //@PostMapping("/greeting")
     @PostMapping(path = "/token",
-   consumes = MediaType.APPLICATION_JSON_VALUE,
+   //consumes = MediaType.APPLICATION_JSON_VALUE,
+   consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
    produces = MediaType.APPLICATION_JSON_VALUE)
-    public String greetInResponse(@RequestBody String leadRequest) throws Exception {
+    public String greetInResponse(@RequestBody MultiValueMap<String, String> leadRequest) throws Exception {
 
         logger.info("[ Token-backend ] Recieved token request: " + leadRequest);
         // // Convert JSON string to Map
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = mapper.readValue(leadRequest, new TypeReference<>() {
-        });
+        //Map<String, Object> map = mapper.readValue(leadRequest, new TypeReference<>() {
+        //});
+	Map<String, Object> map = new HashMap<>();
         //map.put("uid", "1234");
         map.put("access_token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6MTF9.eyJqdGkiOiJodHRwczovL3RyYWtwYXRjaC5tYW5pcGFsaG9zcGl0YWxzLmNvbS9vYXV0aDIuTDlxTzAwZDg3dXUyYVZWRGFHcUVLNnEtNE1FIiwiaXNzIjoiaHR0cHM6Ly90cmFrcGF0Y2gubWFuaXBhbGhvc3BpdGFscy5jb20vb2F1dGgyIiwic3ViIjoiUGF0aWVudEFQUCIsImV4cCI6MTcyNzA5NzgzNiwiYXVkIjoiV0FvWG8yMmVvbGVKZnByRkl5N25BdWZ6WFFXSjhCZ0hTcVpjUDNyWVljayJ9.pXRWeF7cdgnqJXT0y623JTzpX2nWPD3qa1iA9oOI5R0pvsJU4lGJ9blTcqybmD483aFVd-_s0Dd8EJNmIU82PDq4KmE4rGkKqlZFzw0OEm1UqgvjnhQMuEDifmTNaDwoUSeLvCvLSA1WaS_x5OWrgk9I8kBwH5rVErRXCaFt81fmNCGSphe70Tt2dVRUYgWauU9g95x0XwfsJIbaakKpDgaIBULEF9qnUOyJY3wTacCieaQRr0w78lnuhG430xLrkZrcgJQ6qUfuceeu6VeNdCXMhSKy20XxD2BrJfHuWS8NZ-FYcDK_AjEpQ50Uu4Aqq3PNsCSBw3l3Btj-4A06Wg");
         map.put("token_type", "Bearer");
