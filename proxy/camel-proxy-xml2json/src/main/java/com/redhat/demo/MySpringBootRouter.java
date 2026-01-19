@@ -27,7 +27,7 @@ public class MySpringBootRouter extends RouteBuilder {
     @Override
         public void configure() throws Exception {
         // from("netty-http:proxy://0.0.0.0:8081")
-        from("netty-http:proxy://0.0.0.0:8080")
+        from("netty-http:proxy://0.0.0.0:8081")
             .to("xj:identity?transformDirection=XML2JSON")
             .log("xml to json : ${body}")
             .setHeader(Exchange.CONTENT_TYPE, simple("application/json"))
