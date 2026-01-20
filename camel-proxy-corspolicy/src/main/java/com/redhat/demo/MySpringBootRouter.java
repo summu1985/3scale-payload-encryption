@@ -66,7 +66,8 @@ public class MySpringBootRouter extends RouteBuilder {
 
                 // Block disallowed origins for non-OPTIONS
                 .choice()
-                .when(simple("${exchangeProperty.cors.origin} != null && ${exchangeProperty.cors.allowed} == false"))
+                // .when(simple("${exchangeProperty.cors.origin} != null && ${exchangeProperty.cors.allowed} == false"))
+                .when(simple("${exchangeProperty.cors.origin} == null || ${exchangeProperty.cors.allowed} == false"))
                 .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(403))
                 .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
                 .setBody(constant("{\"error\":\"CORS origin not allowed\"}"))
